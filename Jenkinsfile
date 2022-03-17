@@ -15,16 +15,16 @@ node {
     stage('Build y Push a DockerHub') {
         // Build and push the image ###############################
         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
-            def app = docker.build("106Pawel/EMV:${commit_id}", '.').push()
+            def app = docker.build("106pawel/EMV:${commit_id}", '.').push()
         }
         // Guardo la confirmación de id anterior en el archivo
         sh "echo ${commit_id} > .git/previous-id"
         // Borra imagen #############################
-        sh "docker rmi 106Pawel/EMV:${commit_id}"
+        sh "docker rmi 106pawel/EMV:${commit_id}"
     }
     stage('Correr contenedor') {
         // guardar imagen en restricción #################################
-        def cont = docker.image("106Pawel/EMV:${commit_id}")
+        def cont = docker.image("106pawel/EMV:${commit_id}")
         // Descargamos imagen
         cont.pull()
         // Eliminar contenedor si existe con el mismo nombre
@@ -32,6 +32,6 @@ node {
 
 
         // Ejecutar contenedor   ########################
-        sh "docker run -d --restart always -p 5434:80 -u root:root --name vue-EMV 106Pawel/EMV:${commit_id}" 
+        sh "docker run -d --restart always -p 5434:80 -u root:root --name vue-EMV 106pawel/EMV:${commit_id}" 
     } 
 }
