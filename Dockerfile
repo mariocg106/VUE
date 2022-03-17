@@ -2,8 +2,8 @@ FROM node:lts-alpine AS builder
 ENV NODE_ENV production
 WORKDIR /app
 ADD . .
-RUN npm install --production=false
-RUN npm run dev 
+RUN npm install 
+RUN npm run build 
 
 
 FROM nginx:alpine
