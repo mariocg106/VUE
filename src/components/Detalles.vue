@@ -43,7 +43,20 @@
            <h1>Descripcion</h1>
            <p>{{result.carId.datacar.descripcion}} </p>
         </div>
-        <!-- <button class="btn btn-primary" type="button">Button</button> -->
+        
+        
+        <!-- <div class="car" v-for="car in resultz.carList" :key="car.codcoche" :car="car" >
+
+            <router-link Class="mascar" :to="{name: 'Detalles', params: {codcoche: car.codcoche }}">
+              <div class="namecar"> <img :src="car.imagen" alt=""></div>
+              <nav class="info" > <p v-if="marca" > {{marca.nombre}} </p>  {{car.nombre}} </nav> 
+              <nav class="precio" >  {{car.precio}}€ </nav>  
+              <nav class="ano" > • {{car.Ano}} • {{car.Kilometros}} Km </nav>  
+            </router-link>
+            
+
+        </div> -->
+        
        
   	</section>
     <foter />
@@ -60,6 +73,8 @@
 import Detalles from "@/components/Detalles";
 import { useQuery, useResult } from "@vue/apollo-composable";
 import gql from "graphql-tag";
+import { carListQuery }from "../graphql/carList";
+
 
 import { showcar }from "../graphql/showcar";
 
@@ -74,6 +89,8 @@ export default {
     foter
     
   },
+    props: ["codcoche"],
+
 
 
   props: ["codcoche"],
@@ -82,12 +99,17 @@ export default {
     const { result } = useQuery( showcar,
      () => ({ codcoche: props.codcoche }) );
     console.log(result);
-    
+
+    // const { result: resultz } = useQuery(carListQuery)
+    // const carList = useResult(result, null,  data => data.carList)
+    // console.log(resultz )
+
+
 
    
     
     return {
-      result
+      result,
     };
   },
 };
@@ -120,6 +142,10 @@ body {
   background: #eee;
 }
 /********************************************************************************** */
+
+
+/*******************       listadode coches                **********      * */
+
 
 nav {
   padding-right: 70px;
@@ -198,19 +224,18 @@ section {
 div.precio {
   
   color: white;
-  width: 400px ;
+  width: 350px ;
   height: 80px;
   font-size: 300%;
   border-radius: 15px  15px 0px 0px ;
-  /* line-height: 1; */
-  /* padding-top: calc( 10vh - 60pt); */
   font-weight: 700;
   position: absolute;
   top: 73.3vh;
-  left: 60%;
+  left: 70%;
   background: black;
   opacity:.85;  
 }
+
  nav.fotos{
    color: white;
   width: 200px ;
@@ -294,7 +319,7 @@ div.nombre  h1 {
   /* background: blue ; */
   height: 25% ;
   text-align: center;
-  width: 70%;
+  width: 60%;
   margin: 0 5% 1% 5%  ;
   padding: 0 20px;
   border: 1px solid #777;
@@ -337,7 +362,7 @@ div.nombre  h1 {
 /***********************************************************************/ 
 
 .descripcion {
-  width: 70% ;
+  width: 60% ;
   margin-left:5% ;
   text-align: left;
 
@@ -364,6 +389,9 @@ div.nombre  h1 {
   }
  
 }
+
+/* LISTADO DE  COCHES*/
+
 
 
 /* And here's the magic! EQCSS.js required */

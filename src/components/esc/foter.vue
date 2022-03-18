@@ -29,8 +29,6 @@
                     </div>
                 </div>
             </div>
-      
-
     </div>
 
   
@@ -61,8 +59,9 @@ html {
 
 .footer-clean {
   background-color:black;
-  margin-top: 100%;
-  padding:50px 0;
+  bottom: 0;
+   margin-top: 100%; 
+  padding:50px 0; 
   color:white;
 }
 

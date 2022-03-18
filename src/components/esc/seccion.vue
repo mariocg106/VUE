@@ -5,7 +5,7 @@
     <body>
         <div class="alquiler" >
         <h1>CARS FOR YOU </h1>
-        <p>Coches segunda mano, nuevos y Km0 en nuestra gama de vehículos de alta gama.</p>
+        <p>Coches de segunda mano, nuevos y Km0 en nuestra gama de vehículos de alta gama.</p>
         <div class="marcas">
             <div class="mar" v-for="marca in marcaList"  :key="marca.cifm" >
 
@@ -38,26 +38,16 @@
 <script>
 // @ is an alias to /src
 import seccion from '@/components/esc/seccion.vue'
-
 /*****************************/ 
 import { useQuery, useResult, useMutation   } from '@vue/apollo-composable';
 import { ref } from 'vue'
 // import carListQuery from '../../graphql/car.query.gql'
 import { carListQuery }from "../../graphql/carList";
 import gql from "graphql-tag";
-
 // import marcaListQuery from '../../graphql/marca.query.gql';
-
 import { marcaListQuery } from "../../graphql/marca";
-
-
 // import deletecar from '../../graphql/borrarcar.query.gql';
-
-
-
-
 // import gql from 'graphql-tag'
-
 export default {
   name: 'Home',
   components: {  
@@ -66,22 +56,14 @@ export default {
   },
   props: ["codcoche"],
   props: ["cifm"],
-
-
-
-
   setup() {
     //const message = ref('hola mohamed')
     const { result } = useQuery(carListQuery)
     const carList = useResult(result, null,  data => data.carList)
-
     const { result: resultz } = useQuery(marcaListQuery)
     const marcaList = useResult(resultz, null,  data => data.marcaList)
-
     console.log(result, resultz )
-
     // el deletecar 
-
     const { mutate: Mutation } = useMutation(gql`
             mutation Mutation($codcoche: ID!) {
                     deletecar(codcoche: $codcoche) {
@@ -100,7 +82,6 @@ export default {
                       }
                     }
                   }`)
-
     function deleteAndUpdateCache(codcoche) {
       
       Mutation({ codcoche }, {
@@ -108,12 +89,9 @@ export default {
         const data = store.readQuery({query: carListQuery})
         const updatedData = data.carList.filter(w => w.codcoche !== codcoche)
         store.writeQuery({query: carListQuery, data: { carList: updatedData}})
-
       }
     });
     }
-
-
    return {  carList, marcaList,deleteAndUpdateCache }
   },
         
@@ -154,7 +132,6 @@ div .marcas  {
       width: 100%;
       padding-left: 25px;
 }
-
 div .mar {
     padding: 5px;
     padding-right: 10px;
@@ -169,12 +146,7 @@ div .mar {
 div .mar a {
   color:black;
   text-decoration: none;
-
   }
-
-
-
-
 /*************************** LOS DATOS DE COCHES ********************************** */
 div .car {
     margin: 5px;
@@ -185,11 +157,9 @@ div .car {
     height: auto;
     
 }
-
 div .car a {
   color:black;
   text-decoration: none;
-
   }
 div .info {
     font-size: 20pt;
@@ -198,7 +168,6 @@ div .info {
     font-weight: bold;  
     margin-bottom: 30px;
 }
-
 div .precio {
         font-weight: bold;  
     font-size: 20pt;
@@ -213,7 +182,6 @@ div .ano {
 }
 /* .contenedor:hover .imagen {-webkit-transform:scale(1.3);transform:scale(1.3);}
 .contenedor {overflow:hidden;} */
-
  /*
 div .car:hover {
   -webkit-transform:scale(1.5);transform:scale(1.5); */
@@ -222,14 +190,11 @@ div .car:hover {
      backface-visibility: hidden;
         transform: scale(1.15, 1.15);
         opacity: 1
-
 }*/
-
 div.namecar img {
     border-radius:  10px 10px 0px 0px ;
     overflow:hidden;
     backface-visibility: hidden;
-
     width: 100%;
     height: 350px;
 }
@@ -238,10 +203,6 @@ div.namecar img:hover {
         transform: scale(1.03,1.03);
         opacity: 2
 }
-
-
-
-
 .alquiler {
  width: 100%;
   height: 200px;
@@ -267,12 +228,5 @@ div p {
   display: block;
   font-weight: 700;
 }
-
-
-
-
 /****************************************************************** */
-
-
-
 </style >
