@@ -48,7 +48,7 @@ nav {
 nav .mascar {
   border :  1px solid rgba(233, 35, 35, 0.933);
   border-radius: 7px ;
-  background:  rgba(233, 35, 35, 0.933);
+  background:  blue;
  padding-left: 20px;
  padding-right: 20px;
   -moz-opacity:.50;opacity:.90;

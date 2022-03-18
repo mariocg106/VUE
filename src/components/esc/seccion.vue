@@ -15,6 +15,7 @@
 
             </div>      
         </div>
+        
         </div>
 
           <div class="car" v-for="car in carList" :key="car.codcoche" :car="car" >
@@ -26,7 +27,7 @@
               <nav class="ano" > • {{car.Ano}} • {{car.Kilometros}} Km </nav>  
                
             </router-link>
-            <!-- <button @click="deleteAndUpdateCache(car.codcoche)">Borrar</button> -->
+            <button @click="deleteAndUpdateCache(car.codcoche)">Borrar</button>
 
           </div>
           <foter />
